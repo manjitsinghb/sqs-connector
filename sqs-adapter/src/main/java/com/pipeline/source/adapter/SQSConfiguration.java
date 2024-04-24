@@ -12,6 +12,8 @@ public class SQSConfiguration {
 
     private String region;
 
+    private int waitTimeSeconds;
+
     public String getQueueUrl() {
         return queueUrl;
     }
@@ -52,5 +54,13 @@ public class SQSConfiguration {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public int getWaitTimeSeconds() {
+        return waitTimeSeconds;
+    }
+
+    public void setWaitTimeSeconds(int waitTimeSeconds) {
+        this.waitTimeSeconds = waitTimeSeconds;
     }
 }

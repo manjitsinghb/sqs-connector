@@ -15,15 +15,18 @@ public class SQSSource {
 
     private AmazonSQS amazonSQS;
 
+    private int waitTimeSeconds;
+
     public SQSSource(SQSConfiguration sqsConfiguration){
        this.amazonSQS = SQSAdapter.buildClient(sqsConfiguration);
        this.queueUrl = sqsConfiguration.getQueueUrl();
+       this.waitTimeSeconds = sqsConfiguration.getWaitTimeSeconds();
     }
 
     public List<Message> receiveMessage(){
         ReceiveMessageRequest receive_request = new ReceiveMessageRequest()
                 .withQueueUrl(queueUrl)
-                .withWaitTimeSeconds(20);
+                .withWaitTimeSeconds(waitTimeSeconds);
         ReceiveMessageResult receiveMessageResult = amazonSQS.receiveMessage(receive_request);
         return receiveMessageResult.getMessages();
     }
